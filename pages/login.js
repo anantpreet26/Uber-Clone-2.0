@@ -19,7 +19,7 @@ function Login(props) {
         router.push("/");
       }
     });
-  }, []);
+  });
   
   return (
     <Wrapper>

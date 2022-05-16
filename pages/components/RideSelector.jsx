@@ -19,14 +19,16 @@ function RideSelector({ pickupCoordinates, dropoffCoordinates }) {
       .then((res) => setRideDuration(res.routes[0].duration / 100))
       .catch((err) => console.log(err));
   }, [pickupCoordinates, dropoffCoordinates]);
+
   return (
     <Wrapper>
       <Title>Choose a ride, or swipe up for more</Title>
       <CarList >
         {carList.map((car, index) => (
           <Link
+          key={`uber-${index}`}
           href={{
-            pathname: "../confirm",
+            pathname: "../enjoy",
             query: {
               Selected: selected,
             },
@@ -34,9 +36,9 @@ function RideSelector({ pickupCoordinates, dropoffCoordinates }) {
           passHref={true}
         >
           <Car onClick={() =>handleClick(index) }
-          key={`uber-${index} `} >
+          key={`uber-${index}`} >
             <CarImage src={car.imgUrl} />
-            <CarDetails>
+            <CarDetails >
               <Service>{car.service}</Service>
               <Time>5 min away</Time>
             </CarDetails>
