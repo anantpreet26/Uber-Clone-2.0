@@ -93,10 +93,10 @@ const Input = tw.input`h-10 bg-gray-200 my-2 rounded-2 p-2 outline-none border-n
 
 const PlusIcon = tw.img`w-10 h-10 bg-gray-200 rounded-full ml-2 p-1`;
 
-const SavedPlaces = tw.div`flex items-center bg-white px-4 py-2 mb-2 dark:bg-gray-600`;
+const SavedPlaces = tw.div`flex items-center bg-white px-4 py-2 mb-2 `;
 const StarIcon = tw.img`bg-gray-400 w-10 h-10 p-2 rounded-full mr-2`;
 
 const ConfirmButtonContainer = tw.div`flex`;
 const ConfirmButton = tw.button`bg-black text-white flex-1 h-12`;
 
-export default Search;
+export default Search ;

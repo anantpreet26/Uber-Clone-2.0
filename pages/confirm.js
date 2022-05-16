@@ -15,6 +15,7 @@ function Confirm(props) {
     getPickupCoordinates(pickupSearched);
     getDropOffCoordinates(dropOffSearched);
   }, [dropOffSearched, pickupSearched]);
+
   const getPickupCoordinates = (location) => {
     const url =
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?` +
@@ -78,4 +79,5 @@ const ConfirmButtonContainer = tw.div`flex m-4`;
 const ConfirmButton = tw.button`bg-black text-white flex-1 h-14`;
 const BackButtonContainer = tw.div`p-2 shadow-lg m-3 absolute top-0 h-10 w-10 bg-white rounded-full z-10 dark:bg-gray-600`;
 const BackButton = tw.img``;
+
 export default Confirm;

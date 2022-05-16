@@ -7,8 +7,8 @@ import {
   updateProfile,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { auth , db } from "../firebase";
-import { collection, addDoc } from "firebase/firestore"; 
+import { auth } from "../firebase";
+// import { collection, addDoc } from "firebase/firestore"; 
 
 export const UserContext = createContext({});
 
@@ -48,12 +48,12 @@ export const UserContextProvider = ({ children }) => {
       .finally(() => setLoading(false));
       
       
-        addDoc(collection(db, "users"), {
-          Name: name,
-          Email: email,
-          Password: password,
-          Trips:[]
-        });
+        // addDoc(collection(db, "users"), {
+        //   Name: name,
+        //   Email: email,
+        //   Password: password,
+        //   Trips:[]
+        // });
         
       
   };
