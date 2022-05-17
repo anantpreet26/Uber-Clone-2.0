@@ -1,5 +1,9 @@
 import React from 'react';
 import { loadStripe } from '@stripe/stripe-js';
+import tw from "tailwind-styled-components";
+import { useRouter } from "next/router";
+
+// import Link from "next/link";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -8,6 +12,8 @@ const stripePromise = loadStripe(
 );
 
 export default function PreviewPage() {
+  const router = useRouter();
+  const {Duration,Selected} = router.query;
   React.useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
@@ -21,39 +27,37 @@ export default function PreviewPage() {
   }, []);
 
   return (
-    <form action="/api/checkout_sessions" method="POST">
-      <section>
-        <button type="submit" role="link">
-          Checkout
-        </button>
-      </section>
-      <style jsx>
-        {`
-          section {
-            background: #ffffff;
-            display: flex;
-            flex-direction: column;
-            width: 400px;
-            height: 112px;
-            border-radius: 6px;
-            justify-content: space-between;
-          }
-          button {
-            height: 36px;
-            background: #556cd6;
-            border-radius: 4px;
-            color: white;
-            border: 0;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
-          }
-          button:hover {
-            opacity: 0.8;
-          }
-        `}
-      </style>
-    </form>
+    
+      <Wrapper>
+            <LogoC>
+            <UberLogo
+            src={"https://i.ibb.co/84stgjq/uber-technologies-new-20218114.jpg"}
+          />
+          </LogoC>
+        <ConfirmButtonContainerC>
+            <Container>
+            <Logo
+            src={"https://i.ibb.co/2716P6Q/114283334.jpg"}
+          />
+          <Booking>Booking Confirmed</Booking>
+          </Container>
+        </ConfirmButtonContainerC>
+        <ConfirmButtonContainer action='/api/checkout_sessions' method='POST'>
+          <ConfirmButton>Confirm Payment</ConfirmButton>
+        </ConfirmButtonContainer>
+        </Wrapper>
+      
+  
   );
 }
+
+const Wrapper =tw.div`flex flex-col h-screen m-4`;
+const LogoC =tw.div`flex `;
+const UberLogo = tw.img`mx-auto h-32 w-44`;
+const ConfirmButtonContainer = tw.form`flex m-4 border border-solid border-gray-500 p-2`;
+const ConfirmButtonContainerC = tw.div`flex border border-solid border-green-500 p-4 border-8	`;
+
+const ConfirmButton = tw.button`bg-black text-white flex-1 h-14 `;
+const Container = tw.div`flex mx-auto`;
+const Booking = tw.div`flex bg-white text-black text-xl flex-1 justify-content items-center `;
+const Logo = tw.img` mx-[10px] h-16 w-16`;

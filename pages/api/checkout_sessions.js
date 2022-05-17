@@ -8,10 +8,11 @@ export default async function handler(req, res) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: '{{PRICE_ID}}',
+            price: 'price_1KzyfSSAKFCsiP5ELzMRFtwZ',
             quantity: 1,
           },
         ],
+        payment_method_types: ['card'],
         mode: 'payment',
         success_url: `${req.headers.origin}/?success=true`,
         cancel_url: `${req.headers.origin}/?canceled=true`,

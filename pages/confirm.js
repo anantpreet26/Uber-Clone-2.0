@@ -7,9 +7,23 @@ import Link from "next/link";
 
 function Confirm(props) {
   const router = useRouter();
-  const { pickupSearched, dropOffSearched,Selected } = router.query;
+  const { pickupSearched, dropOffSearched} = router.query;
+
+  const [selected, setWord] = useState();
+
+
   const [pickup, setPickup] = useState([0, 0]);
   const [dropOff, setDropOff] = useState([0, 0]);
+
+  const [rideDuration, setRideDuration] = useState(0);
+
+  useEffect(() => {
+    fetch(
+      `https://api.mapbox.com/directions/v5/mapbox/driving/${pickup[0]},${pickup[1]};${dropOff[0]},${dropOff[1]}?access_token=pk.eyJ1IjoiYW5hbnQyNiIsImEiOiJjbDFqYzZ5dGUxbXpkM2VydHN6YW15cjN6In0.zTqE0IgykWdguQTKoBgVcg`
+    ).then((res) => res.json())
+      .then((res) => setRideDuration(res.routes[0].duration / 100))
+      .catch((err) => console.log(err));
+  }, [pickup, dropOff]);
 
   useEffect(() => {
     getPickupCoordinates(pickupSearched);
@@ -53,14 +67,12 @@ function Confirm(props) {
       </Link>
       <Map pickup={pickup} dropOff={dropOff} />
       <RideContainer>
-        <RideSelector pickupCoordinates={pickup} dropoffCoordinates={dropOff} />
-        <Link
-         href={{
-          pathname: "/enjoy",
+        <RideSelector pickupCoordinates={pickup} dropoffCoordinates={dropOff} changeWord={word=> setWord(word)}/>
+
+        <Link href={{ pathname: "/payment",
           query: {
-            SSelected:Selected,
-            PickUP:pickup,
-            DropOff:dropOff,
+            Duration: rideDuration,
+            Selected: selected,
           },
         }}
         passHref={true}
